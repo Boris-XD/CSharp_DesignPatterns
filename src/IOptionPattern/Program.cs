@@ -1,3 +1,6 @@
+using IOptionPattern.Configuration;
+using IOptionPattern.Services;
+
 namespace IOptionPattern
 {
     public class Program
@@ -12,6 +15,9 @@ namespace IOptionPattern
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
+
+            builder.Services.AddTransient<IRedisService, RedisService>();
+            builder.Services.Configure<RedisConfiguration>(builder.Configuration.GetSection("RedisConfiguration"));
 
             var app = builder.Build();
 
